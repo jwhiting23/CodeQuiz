@@ -1,1 +1,1 @@
-# PasswordGenerator
+# CodeQuiz
