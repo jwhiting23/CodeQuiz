@@ -1,39 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <!-- <script scr="script.js" defer></script> -->
-    <script src="./script.js" defer></script>
-    <link rel="stylesheet" href="./assets/css/style.css" />    
-    <title>Password Generator</title>
-  </head>
-  <body>
-    <div class="container">
-      <h1 class="title">Password Generator</h1>
-      <h3 class="password-display" id="passwordDisplay">password</h3>
-      <form id ="passwordGeneratorForm" class="form">
-          <label for="characterAmountNumber">Number of Characters</label>
-          <div class="character-amount-container">
-            <input type="range" min="1" max="50" value="10" id="characterAmountRange">
-            <input class="number-input" type="number" min="1" max="50" value="10" id="characterAmountNumber">
-          </div>
-          
-          <label for="includeUppercase">Include Uppercase</label>
-          <input type="checkbox" id="includeUpperCase">
 
-          <label for="includeNumbers">Include Numbers</label>
-          <input type="checkbox" id="includeNumbers">
-          
-          <label for="includeSymbols">Include Symbols</label>
-          <input type="checkbox" id="includeSymbols">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Question Test</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <!-- <script src="jquery-3.4.1.min.js"></script> -->
+</head>
 
-          <button  type="submit" class="btn">Generate Password</button>
-      </form>
-    </div> 
-       
-  </body>
-</html>
+<body>
+    <div class = 'container'>
+        <div id='questionsCon' class='hide'>
+            <div id="question">Question</div>
+            <div>Time Remaining <span id="time">02:00</span></div>
+            <div>Score<span id='score'></span></div>
+            <div id="answer-buttons" class="btn-grid">
+                <button class='btn'>Answer 1</button>
+                <button class='btn'>Answer 2</button>
+                <button class='btn'>Answer 3</button>
+                <button class='btn'>Answer 4</button>
+            </div>
+        </div> 
+        <div id='choices'>
+            <button id="start-btn" class='start-btn btn'>Start</button>
+            <button id="next-btn" class='next-btn btn hide'>Next Question</button>
+            <button id="submit-btn" class='submit-btn btn hide'>Submit</button>
+        </div>
+        
+    </div>
+</body>
+    
+<script src="./script.js"></script>
+</body>
 
-
+</html> 

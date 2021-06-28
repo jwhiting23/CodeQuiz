@@ -1,70 +1,135 @@
-const characterAmountRange = document.getElementById('characterAmountRange')
-const characterAmountNumber = document.getElementById('characterAmountNumber')
-const includeUppercaseElement = document.getElementById('includeUpperCase')
-const includeNumbersElement = document.getElementById('includeNumbers')
-const includeSymbolsElement = document.getElementById('includeSymbols')
-const form = document.getElementById('passwordGeneratorForm')
-const passwordDisplay = document.getElementById('passwordDisplay') //gets the password
-//console.log(characterAmountRange)
-//console.log(characterAmountNumber)
-//console.log(includeUppercaseElement)
-//console.log(includeNumbersElement)
-//console.log(includeSymbolsElement)
+const startButton = document.getElementById('start-btn');
+const nextButton = document.getElementById('next-btn');
+const questionsContainerEl = document.getElementById('questionsCon');
 
-//Using the ASCII Character Codes Table gets all the upper case codes from 65 - 90
-const LOWERCASE_CHAR_CODES = arrayFromLowToHigh(97, 122)
-const UPPERCASE_CHAR_CODES = arrayFromLowToHigh(65, 90)
+const questionElement = document.getElementById('question')
+const answerButtonsElement = document.getElementById('answer-buttons')
 
-const NUMBER_CHAR_CODES = arrayFromLowToHigh(48, 57)
-const SYMBOL_CHAR_CODES = arrayFromLowToHigh(33, 47).concat(arrayFromLowToHigh(58, 64)).concat(arrayFromLowToHigh(91, 96)).concat(arrayFromLowToHigh(123, 126))
+var score = 0;
 
-characterAmountNumber.addEventListener('input', syncCharacterAmount)
-characterAmountRange.addEventListener('input', syncCharacterAmount)
+let shuffledQuestions, currentQuestionIndex;
 
-form.addEventListener('submit', e => {
-  e.preventDefault()
-  const characterAmount = characterAmountNumber.value
-  const includeUppercase = includeUppercaseElement.checked
-  const includeNumbers = includeNumbersElement.checked
-  const includeSymbols = includeSymbolsElement.checked
-  const password = generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols)
-  passwordDisplay.innerText = password //not sure
-})
+const questions = [
+    {
+        question: 'Which is a function ?',
+        answers: [
+        { text: 'function ()', correct: true },
+        { text: 'method ()', correct: false },
+        { text: 'variable ()', correct: false },
+        { text: 'class ()', correct: false }
+        ]
+    },
+    {
+        question: 'Who made this test',
+        answers: [
+        { text: 'Jonathan', correct: true },
+        { text: 'The professor', correct: false },
+        { text: 'Some rando on stack overflow ', correct: false },
+        { text: 'Some student I paid', correct: false }
+        ]
+    },
+    {
+        question: 'Best coffee?',
+        answers: [
+        { text: 'Latte', correct: false },
+        { text: 'Black', correct: true },
+        { text: 'Espresso', correct: false },
+        { text: 'Mocha', correct: false }
+        ]
+    },
+    {
+        question: 'Best Ice Cream?',
+        answers: [
+        { text: 'Chocolate', correct: false },
+        { text: 'Cookies and Cream', correct: true },
+        { text: 'Mint Chocolate Chip', correct: false },
+        { text: 'Strawberry', correct: false }
+        ]
+    }
+]
 
-function generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols) {
-  let charCodes = LOWERCASE_CHAR_CODES
-    if (includeUppercase) charCodes = charCodes.concat(UPPERCASE_CHAR_CODES)
-    if (includeSymbols) charCodes = charCodes.concat(SYMBOL_CHAR_CODES)
-    if (includeNumbers) charCodes = charCodes.concat(NUMBER_CHAR_CODES)
+startButton.addEventListener('click',startGame);
+
+// Timer 
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+        if(seconds === 0) {
+            alert('Game Over!')
+        }
+    }, 1000);
+}
+
+startButton.addEventListener('click',startGame);
+startButton.addEventListener("click", function() {
+    var twoMinutes = 60 * 2,
+        display = document.querySelector('#time');
+    startTimer(twoMinutes, display);
+});
+
+// Start The Questions 
+function startGame() {
     
-    const passwordCharacters = []
-    for (let i= 0; i < characterAmount; i++) {
-      //const characterCode = charCodes[Math.floor(Math.random() * charCodes.length)]
-      //passwordCharacters.push(string.fromCharCode(characterCode)) //gives error
+    startButton.classList.add('hide');
+    shuffledQuestions = questions.sort(() => Math.random() - .5);
+    questionsContainerEl.classList.remove('hide');
+    currentQuestionsIndex = 0;
+    nextQuestion();
+    nextButton.classList.remove('hide')
 
-      const character = charCodes[Math.floor(Math.random() * characterAmount)]
-      passwordCharacters.push(character) //Works
+}
 
-      //const characterCode = charCodes[Math.floor(Math.random() * characterAmount)]
-      //passwordCharacters.push(string.fromCharCode(characterCode)) 
+function showQuestion(questions) {
+    questionElement.innerText = questions.value
+    console.log(questions)
+    question.answers.forEach(answer => {
+      const button = document.createElement('button')
+      button.innerText = answer.text
+      button.classList.add('btn')
+      if (answer.correct) {
+        button.dataset.correct = answer.correct
+      }
+      button.addEventListener('click', selectAnswer)
+      answerButtonsElement.appendChild(button)
+    })
+}
+
+
+// Reset 
+function resetState() {
+    clearStatusClass(document.body)
+    nextButton.classList.add('hide')
+    while (answerButtonsElement.firstChild) {
+        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
     }
-    //console.log(LOWERCASE_CHAR_CODES)
-    return passwordCharacters.join('')
 }
 
-//generates from low number to high number
-function arrayFromLowToHigh(low, high) {
- const array = []
-  for (let i = low; i <= high; i++) {
-    array.push(i)    
+// Test Loop
+function questionsloop(questions) {
+
+    for (var i = 0; i < questions.length; i ++);
+    questions.innerText('#question');
+    if (answer.correct) {
+        button.dataset.correct = answer.correct
+        score ++;
     }
-    return array
+    score.innerText('Correct')
+
 }
 
-function syncCharacterAmount(e) {
-  const value = e.target.value
-  characterAmountNumber.value = value
-  characterAmountRange.value = value
+// Next Questions 
+function nextQuestion() {
+    showQuestion(shuffledQuestions[currentQuestionIndex]);
+    
 }
-
-//console.log("Helloworld")

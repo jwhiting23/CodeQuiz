@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Launch Chrome against localhost",
             //"url": "http://localhost:8080",
-            "url": "c:\\Users\\jwhiting\\development\\PasswordGenerator\\index.html",
+            "url": "c:\\Users\\jwhiting\\development\\CodeQuiz\\index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
