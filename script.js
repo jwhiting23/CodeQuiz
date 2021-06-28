@@ -91,7 +91,7 @@ function startGame() {
 }
 
 function showQuestion(questions) {
-    questionElement.innerText = questions.value
+    questionElement.innerText = questions.question
     console.log(questions)
     question.answers.forEach(answer => {
       const button = document.createElement('button')
