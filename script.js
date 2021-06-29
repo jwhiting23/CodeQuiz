@@ -7,7 +7,13 @@ const answerButtonsElement = document.getElementById('answer-buttons')
 
 var score = 0;
 
-let shuffledQuestions, currentQuestionIndex;
+//let shuffledQuestions;
+//let currentQuestionIndex = 0;
+
+var shuffledQuestions;
+let currentQuestionIndex = 0;
+
+//console.log(currentQuestionIndex);
 
 const questions = [
     {
@@ -89,21 +95,38 @@ function startGame() {
     nextButton.classList.remove('hide')
 
 }
-
 function showQuestion(questions) {
-    questionElement.innerText = questions.question
-    console.log(questions)
-    question.answers.forEach(answer => {
-      const button = document.createElement('button')
-      button.innerText = answer.text
-      button.classList.add('btn')
+    console.log('questions', questions);
+    console.log('questions.question', questions.question);
+    questionElement.innerText = questions.question;
+    console.log('questions.answers', questions.answers);
+    questions.answers.forEach((answer) => {
+      console.log('answer', answer);
+      const button = document.createElement('button');
+      button.innerText = answer.text;
+      button.classList.add('btn');
       if (answer.correct) {
-        button.dataset.correct = answer.correct
+        button.dataset.correct = answer.correct;
       }
-      button.addEventListener('click', selectAnswer)
-      answerButtonsElement.appendChild(button)
-    })
-}
+      button.addEventListener('click', questions.answers);
+      //button.addEventListener('click', selectAnswer);
+      answerButtonsElement.appendChild(button);
+    });
+  }
+// function showQuestion(questions) {
+//     questionElement.innerText = questions.questions
+//     console.log(questions)
+//     question.answers.forEach(answer => {
+//       const button = document.createElement('button')
+//       button.innerText = answer.text
+//       button.classList.add('btn')
+//       if (answer.correct) {
+//         button.dataset.correct = answer.correct
+//       }
+//       button.addEventListener('click', selectAnswer)
+//       answerButtonsElement.appendChild(button)
+//     })
+// }
 
 
 // Reset 
@@ -117,7 +140,7 @@ function resetState() {
 
 // Test Loop
 function questionsloop(questions) {
-
+    //console.log(questions)
     for (var i = 0; i < questions.length; i ++);
     questions.innerText('#question');
     if (answer.correct) {
@@ -130,6 +153,7 @@ function questionsloop(questions) {
 
 // Next Questions 
 function nextQuestion() {
+    //console.log(currentQuestionIndex)
     showQuestion(shuffledQuestions[currentQuestionIndex]);
     
 }
