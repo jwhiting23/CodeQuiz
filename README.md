@@ -27,5 +27,5 @@ THEN the game is over
 WHEN the game is over
 THEN I can save my initials and my score
 
-git hub repo: https://github.com/jwhiting23/CodeQuiz 
+git hub repo: https://github.com/jwhiting23/CodeQuiz.git
 deployed site: https://jwhiting23.github.io/CodeQuiz/
